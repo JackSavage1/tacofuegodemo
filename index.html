@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taco Fuego × Olo — Discovery Brief</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0d0b;
+      --surface: #161510;
+      --surface2: #1e1c17;
+      --border: rgba(255,255,255,0.07);
+      --border-strong: rgba(255,255,255,0.14);
+      --text: #f0ece2;
+      --muted: #8a8478;
+      --accent: #e8b44a;
+      --accent-dim: rgba(232,180,74,0.12);
+      --accent-dim2: rgba(232,180,74,0.06);
+      --red: #e05a3a;
+      --red-dim: rgba(224,90,58,0.12);
+      --green: #4caf7d;
+      --green-dim: rgba(76,175,125,0.12);
+      --blue: #5b9bd5;
+      --blue-dim: rgba(91,155,213,0.12);
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --radius: 10px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(14,13,11,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 52px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand {
+      font-family: var(--serif);
+      font-size: 15px;
+      color: var(--accent);
+      letter-spacing: 0.01em;
+    }
+    .nav-links {
+      display: flex; gap: 1.5rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 12px; font-weight: 400; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    /* SECTIONS */
+    section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 6rem 2rem 4rem;
+    }
+    section:first-of-type { padding-top: 8rem; }
+    .section-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    h3 {
+      font-size: 14px; font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    p { color: var(--muted); margin-bottom: 1rem; max-width: 640px; }
+    p.wide { max-width: 100%; }
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+    /* HERO */
+    .hero-meta {
+      display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+    }
+    .badge {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 4px 10px;
+      border-radius: 4px; border: 1px solid;
+    }
+    .badge-amber  { color: var(--accent); border-color: rgba(232,180,74,0.3); background: var(--accent-dim2); }
+    .badge-red    { color: var(--red);    border-color: rgba(224,90,58,0.3);  background: var(--red-dim); }
+    .badge-green  { color: var(--green);  border-color: rgba(76,175,125,0.3); background: var(--green-dim); }
+    .badge-blue   { color: var(--blue);   border-color: rgba(91,155,213,0.3); background: var(--blue-dim); }
+    /* STAT CARDS */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin: 2rem 0;
+    }
+    .stat-card {
+      background: var(--surface);
+      padding: 1.5rem;
+    }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-num.red   { color: var(--red); }
+    .stat-num.amber { color: var(--accent); }
+    .stat-num.green { color: var(--green); }
+    .stat-label { font-size: 12px; color: var(--muted); font-weight: 400; }
+    /* PAIN POINTS */
+    .pain-list {
+      display: flex; flex-direction: column; gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+    .pain-item {
+      display: flex; align-items: flex-start; gap: 1rem;
+      background: var(--surface);
+      padding: 1.25rem 1.5rem;
+      transition: background 0.2s;
+    }
+    .pain-item:hover { background: var(--surface2); }
+    .pain-icon {
+      width: 28px; height: 28px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0; margin-top: 2px;
+    }
+    .pain-icon.red   { background: var(--red-dim); }
+    .pain-icon.amber { background: var(--accent-dim); }
+    .pain-body h3 { margin-bottom: 2px; }
+    .pain-body p  { margin: 0; font-size: 14px; }
+    /* DISCOVERY QUESTIONS */
+    .question-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 600px) { .question-grid { grid-template-columns: 1fr; } }
+    .q-card {
+      background: var(--surface);
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .q-card:hover { background: var(--surface2); }
+    .q-num {
+      font-family: var(--serif); font-size: 1.6rem; color: var(--border-strong);
+      line-height: 1; margin-bottom: 0.5rem;
+    }
+    .q-text { font-size: 14px; color: var(--text); font-weight: 400; line-height: 1.5; }
+    .q-intent { font-size: 12px; color: var(--muted); margin-top: 0.4rem; font-style: italic; }
+    /* PRODUCT SUITES */
+    .suite-tabs {
+      display: flex; gap: 2px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 4px;
+      margin-bottom: 1.5rem;
+    }
+    .suite-tab {
+      flex: 1; padding: 8px 12px; border-radius: 7px;
+      font-size: 13px; font-weight: 400; cursor: pointer;
+      border: none; background: transparent;
+      color: var(--muted); transition: all 0.2s;
+      font-family: var(--sans);
+    }
+    .suite-tab.active { background: var(--surface2); color: var(--text); border: 1px solid var(--border-strong); }
+    .suite-tab:hover:not(.active) { color: var(--text); }
+    .suite-panel { display: none; }
+    .suite-panel.active { display: block; }
+    .suite-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .suite-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 1rem;
+    }
+    .suite-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .suite-body { padding: 1.5rem; }
+    .suite-analogy {
+      background: var(--accent-dim2);
+      border: 1px solid rgba(232,180,74,0.15);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .suite-analogy strong { color: var(--accent); font-weight: 500; }
+    .feature-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 8px;
+      margin-top: 1rem;
+    }
+    .feature-list li {
+      font-size: 14px; color: var(--muted);
+      display: flex; gap: 0.6rem; align-items: flex-start;
+    }
+    .feature-list li::before {
+      content: '→';
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    /* SOLUTION MAP */
+    .map-row {
+      display: grid;
+      grid-template-columns: 1fr 40px 1fr;
+      gap: 0; align-items: center;
+      margin-bottom: 1px;
+    }
+    .map-row:last-child { margin-bottom: 0; }
+    .map-pain {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius) 0 0 var(--radius);
+    }
+    .map-arrow {
+      background: var(--surface2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); font-size: 14px;
+    }
+    .map-solution {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: none;
+      padding: 1rem 1.25rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .map-pain h3, .map-solution h3 { font-size: 13px; margin-bottom: 3px; }
+    .map-pain p, .map-solution p { font-size: 12px; margin: 0; }
+    /* ROI CALCULATOR */
+    .roi-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .roi-inputs {
+      background: var(--surface);
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    @media (max-width: 560px) { .roi-inputs { grid-template-columns: 1fr; } }
+    .roi-field label {
+      display: block; font-size: 12px; color: var(--muted);
+      margin-bottom: 6px; font-weight: 400;
+    }
+    .roi-field input {
+      width: 100%; background: var(--bg);
+      border: 1px solid var(--border-strong);
+      border-radius: 7px; padding: 8px 12px;
+      font-size: 15px; color: var(--text);
+      font-family: var(--sans); font-weight: 300;
+      outline: none; transition: border-color 0.2s;
+    }
+    .roi-field input:focus { border-color: var(--accent); }
+    .roi-field .hint { font-size: 11px; color: var(--muted); margin-top: 4px; opacity: 0.7; }
+    .roi-results {
+      background: var(--surface2);
+      padding: 1.5rem;
+    }
+    .roi-result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem; margin-bottom: 1.25rem;
+    }
+    .roi-result-item { }
+    .roi-result-val {
+      font-family: var(--serif); font-size: 1.8rem;
+      line-height: 1; margin-bottom: 4px;
+    }
+    .roi-result-val.green { color: var(--green); }
+    .roi-result-val.amber { color: var(--accent); }
+    .roi-result-label { font-size: 12px; color: var(--muted); }
+    .roi-bar-wrap {
+      margin-top: 1rem;
+    }
+    .roi-bar-label {
+      display: flex; justify-content: space-between;
+      font-size: 12px; color: var(--muted); margin-bottom: 6px;
+    }
+    .roi-bar-track {
+      height: 8px; background: var(--border);
+      border-radius: 4px; overflow: hidden;
+    }
+    .roi-bar-fill {
+      height: 100%; border-radius: 4px;
+      background: var(--green);
+      transition: width 0.6s ease;
+    }
+    .roi-note {
+      font-size: 11px; color: var(--muted); margin-top: 1rem;
+      opacity: 0.6; line-height: 1.6;
+    }
+    /* CLOSING */
+    .closing-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 560px) { .closing-grid { grid-template-columns: 1fr; } }
+    .closing-card {
+      background: var(--surface); padding: 1.5rem;
+    }
+    .closing-card h3 { font-size: 13px; margin-bottom: 0.75rem; }
+    .closing-steps {
+      list-style: none; display: flex; flex-direction: column; gap: 6px;
+    }
+    .closing-steps li {
+      font-size: 13px; color: var(--muted);
+      display: flex; gap: 0.75rem;
+    }
+    .step-num {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: var(--accent-dim); color: var(--accent);
+      font-size: 11px; font-weight: 500;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 12px; color: var(--muted);
+      max-width: 860px; margin: 0 auto 2rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.55s ease forwards; }
+    .delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .delay-2 { animation-delay: 0.2s; opacity: 0; }
+    .delay-3 { animation-delay: 0.3s; opacity: 0; }
+    .delay-4 { animation-delay: 0.45s; opacity: 0; }
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+<nav>
+  <span class="nav-brand">Taco Fuego × Olo</span>
+  <ul class="nav-links">
+    <li><a href="#brand">Brand</a></li>
+    <li><a href="#discovery">Discovery</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#solution">Solution</a></li>
+    <li><a href="#roi">ROI</a></li>
+  </ul>
+</nav>
+<!-- ═══════════════════════════════════════════════════
+  SECTION 1 — HERO / BRAND OVERVIEW
+═══════════════════════════════════════════════════ -->
+<section id="brand">
+  <div class="section-label fade-up">Discovery Brief</div>
+  <h1 class="fade-up delay-1">Taco Fuego<br /><em>× Olo</em></h1>
+  <div class="hero-meta fade-up delay-2">
+    <span class="badge badge-amber">35 Locations</span>
+    <span class="badge badge-red">22% Revenue Leak</span>
+    <span class="badge badge-blue">Southeast US</span>
+    <span class="badge badge-amber">Pre-Sales Discovery</span>
+  </div>
+  <p class="fade-up delay-3">
+    Taco Fuego is a fast-casual taco brand with 35 locations across the Southeast.
+    They've grown 3x in four years on the strength of loyal regulars and a cult following
+    on social media — but their digital ordering infrastructure hasn't kept pace.
+    Right now, more than a third of their digital orders flow through DoorDash and Grubhub,
+    and the commission fees are quietly bleeding the business.
+  </p>
+  <p class="fade-up delay-4">
+    This brief documents the discovery session, product mapping, and projected ROI
+    for a potential Olo engagement — prepared by <strong style="color:var(--text); font-weight:500;">Jack Savage</strong>, Solutions Consultant.
+  </p>
+  <div class="stat-grid reveal">
+    <div class="stat-card">
+      <div class="stat-num red">22%</div>
+      <div class="stat-label">of digital revenue lost to 3rd-party marketplace commissions</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num amber">35</div>
+      <div class="stat-label">locations across AL, GA, FL, TN, SC — all corporate-owned</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num amber">$4.2M</div>
+      <div class="stat-label">estimated annual digital GMV across all locations</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num red">0</div>
+      <div class="stat-label">first-party guest data collected from 3rd-party orders</div>
+    </div>
+  </div>
+  <div class="pain-list reveal">
+    <div class="pain-item">
+      <div class="pain-icon red">💸</div>
+      <div class="pain-body">
+        <h3>Commission bleed on 3rd-party platforms</h3>
+        <p>DoorDash and Grubhub charge 15–30% per order. On $4.2M GMV, that's up to $924K/year leaving the business — while Taco Fuego owns none of those guest relationships.</p>
+      </div>
+    </div>
+    <div class="pain-item">
+      <div class="pain-icon amber">👻</div>
+      <div class="pain-body">
+        <h3>Zero guest data from marketplace orders</h3>
+        <p>When a guest orders through DoorDash, DoorDash owns the data. Taco Fuego has no visibility into who that guest is, how often they order, or how to reach them directly.</p>
+      </div>
+    </div>
+    <div class="pain-item">
+      <div class="pain-icon red">🧩</div>
+      <div class="pain-body">
+        <h3>Fragmented tech stack with 4 separate tablets</h3>
+        <p>Orders from different platforms hit different tablets on the kitchen line. Staff manually re-enter orders, errors climb, and ticket times suffer — especially during peak hours.</p>
+      </div>
+    </div>
+    <div class="pain-item">
+      <div class="pain-icon amber">📉</div>
+      <div class="pain-body">
+        <h3>No loyalty program or repeat-guest strategy</h3>
+        <p>Taco Fuego's most loyal guests are invisible to them digitally. There's no mechanism to identify, reward, or retain high-value regulars across locations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ═══════════════════════════════════════════════════
+  SECTION 2 — DISCOVERY QUESTIONS
+═══════════════════════════════════════════════════ -->
+<section id="discovery">
+  <div class="section-label reveal">Discovery Call</div>
+  <h2 class="reveal">The questions I'd ask<br /><em>in the first 30 minutes</em></h2>
+  <p class="reveal">
+    Good discovery isn't interrogation — it's guided curiosity. Each question below is designed to
+    surface a specific business problem that maps directly to an Olo capability. The goal:
+    let the brand tell me where it hurts, then show them exactly where the solution lives.
+  </p>
+  <div class="question-grid reveal">
+    <div class="q-card">
+      <div class="q-num">01</div>
+      <div class="q-text">"What percentage of your digital orders today come from your own website or app vs. DoorDash and Grubhub?"</div>
+      <div class="q-intent">Intent: Quantify the 3rd-party dependency and commission exposure.</div>
+    </div>
+    <div class="q-card">
+      <div class="q-num">02</div>
+      <div class="q-text">"When a guest orders on DoorDash — what data do you actually receive about that order?"</div>
+      <div class="q-intent">Intent: Surface the guest data blindspot and build urgency around ownership.</div>
+    </div>
+    <div class="q-card">
+      <div class="q-num">03</div>
+      <div class="q-text">"How many tablets or devices does your kitchen staff manage during a typical lunch rush?"</div>
+      <div class="q-intent">Intent: Expose operational friction; set up the Dispatch / Rails unified inbox story.</div>
+    </div>
+    <div class="q-card">
+      <div class="q-num">04</div>
+      <div class="q-text">"Do you have any way today to know which guests are your top 10% by spend — and reach them directly?"</div>
+      <div class="q-intent">Intent: Make the loyalty/guest data gap concrete and personal.</div>
+    </div>
+    <div class="q-card">
+      <div class="q-num">05</div>
+      <div class="q-text">"What does your current online ordering experience look like on mobile — and who built it?"</div>
+      <div class="q-intent">Intent: Assess tech debt and open the door to Olo's white-label ordering frontend.</div>
+    </div>
+    <div class="q-card">
+      <div class="q-num">06</div>
+      <div class="q-text">"If you could fix one thing about your payment processing today, what would it be?"</div>
+      <div class="q-intent">Intent: Open-ended; often surfaces fraud, chargebacks, or reconciliation pain — all Olo Pay wins.</div>
+    </div>
+    <div class="q-card">
+      <div class="q-num">07</div>
+      <div class="q-text">"Are you managing menu updates across all 35 locations manually, or do you have a central system?"</div>
+      <div class="q-intent">Intent: Uncover menu management pain — a major Olo Order differentiator at scale.</div>
+    </div>
+    <div class="q-card">
+      <div class="q-num">08</div>
+      <div class="q-text">"What does success look like for you 12 months from now — what number moves that tells your board the digital program is working?"</div>
+      <div class="q-intent">Intent: Anchor the conversation to outcomes, not features. Maps directly to Olo's ROI story.</div>
+    </div>
+  </div>
+</section>
+<!-- ═══════════════════════════════════════════════════
+  SECTION 3 — PRODUCT SUITES
+═══════════════════════════════════════════════════ -->
+<section id="products">
+  <div class="section-label reveal">Olo Platform</div>
+  <h2 class="reveal">Three products.<br /><em>One connected system.</em></h2>
+  <p class="reveal">
+    Olo isn't a single product — it's three interconnected suites that compound on each other.
+    Here's what each one does, explained the way I'd explain it to a restaurant ops manager
+    who doesn't care about APIs.
+  </p>
+  <div class="suite-tabs reveal">
+    <button class="suite-tab active" onclick="showSuite('order')">Order</button>
+    <button class="suite-tab" onclick="showSuite('pay')">Pay</button>
+    <button class="suite-tab" onclick="showSuite('engage')">Engage</button>
+  </div>
+  <!-- ORDER -->
+  <div class="suite-panel active reveal" id="suite-order">
+    <div class="suite-card">
+      <div class="suite-header">
+        <div class="suite-icon" style="background:var(--blue-dim); font-size:20px;">🧾</div>
+        <div>
+          <h3>Olo Order</h3>
+          <p style="font-size:13px; margin:0;">Your digital front door — owned by you, not a marketplace.</p>
+        </div>
+      </div>
+      <div class="suite-body">
+        <p style="font-size:14px;">
+          Olo Order is the platform that powers your restaurant's own online ordering — your website, your app, your kiosk.
+          When a guest orders directly from you, you keep the margin, you own the data, and you control the experience.
+        </p>
+        <div class="suite-analogy">
+          <strong>Plain English:</strong> Think of it like the difference between selling a concert ticket on your own website vs. selling it through Ticketmaster.
+          Ticketmaster charges you a fee and owns the customer relationship. Olo Order is your own ticketing system — zero commission, your guest data.
+        </div>
+        <ul class="feature-list">
+          <li>Single menu management hub — update prices, items, or hours across all 35 locations in one place</li>
+          <li>White-label ordering on your website and app — looks and feels like your brand, not Olo's</li>
+          <li>Dispatch: manages delivery through DoorDash Drive, Uber Eats, and others — <em>without paying marketplace commission</em></li>
+          <li>Rails: one integration that routes 3rd-party orders directly into your POS — no more tablet chaos</li>
+          <li>Catering module for high-ticket group orders with custom lead times and workflows</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- PAY -->
+  <div class="suite-panel" id="suite-pay">
+    <div class="suite-card">
+      <div class="suite-header">
+        <div class="suite-icon" style="background:var(--green-dim); font-size:20px;">💳</div>
+        <div>
+          <h3>Olo Pay</h3>
+          <p style="font-size:13px; margin:0;">A restaurant-specific payment processor that protects revenue and simplifies operations.</p>
+        </div>
+      </div>
+      <div class="suite-body">
+        <p style="font-size:14px;">
+          Olo Pay replaces your generic payment processor with one built specifically for restaurants.
+          It handles both online and in-store transactions in one dashboard, uses machine learning to reduce fraud,
+          and typically increases the percentage of legitimate transactions that go through successfully.
+        </p>
+        <div class="suite-analogy">
+          <strong>Plain English:</strong> Imagine your current payment processor is a security guard who waves everyone through but lets fraud slip by too.
+          Olo Pay is a smarter guard — it uses AI trained on millions of restaurant transactions to let the good ones through faster
+          and stop fraud before it hits your bank account.
+        </div>
+        <ul class="feature-list">
+          <li>Typically lifts authorization rates by ~5% — meaning more legitimate orders actually complete</li>
+          <li>Machine-learning fraud detection reduces chargebacks and dispute costs</li>
+          <li>Single dashboard for online and in-store payments — one reconciliation, not four</li>
+          <li>Digital wallet support (Apple Pay, Google Pay) for faster checkout and lower cart abandonment</li>
+          <li>Card-present (kiosk/POS) and card-not-present (online) unified on one platform</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- ENGAGE -->
+  <div class="suite-panel" id="suite-engage">
+    <div class="suite-card">
+      <div class="suite-header">
+        <div class="suite-icon" style="background:var(--accent-dim); font-size:20px;">📡</div>
+        <div>
+          <h3>Olo Engage</h3>
+          <p style="font-size:13px; margin:0;">Turn guest transaction data into repeat revenue through personalized marketing.</p>
+        </div>
+      </div>
+      <div class="suite-body">
+        <p style="font-size:14px;">
+          Engage is Olo's guest data and marketing platform. It collects every order, every interaction, and every payment
+          into a single guest profile — then helps you act on it. Segment your guests, run targeted campaigns,
+          predict who's about to churn, and bring them back before they go.
+        </p>
+        <div class="suite-analogy">
+          <strong>Plain English:</strong> Right now, Taco Fuego's most loyal guest — the person who orders every Tuesday —
+          is invisible to you digitally. Engage makes them visible. You can see their lifetime value, send them
+          a personalized offer on Monday night, and measure whether they came back Tuesday.
+          It's the difference between guessing and knowing.
+        </div>
+        <ul class="feature-list">
+          <li>Guest Data Platform (GDP): unified guest profiles built from every order across every channel</li>
+          <li>Predictive guest lifetime value (GLV) and churn risk scoring — powered by machine learning</li>
+          <li>Automated email and SMS campaigns with AI-generated copy (OpenAI-powered)</li>
+          <li>Sentiment analysis — automatically read and respond to guest reviews across platforms</li>
+          <li>Loyalty program integration — connect your rewards program to the full guest data picture</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ═══════════════════════════════════════════════════
+  SECTION 4 — SOLUTION MAP
+═══════════════════════════════════════════════════ -->
+<section id="solution">
+  <div class="section-label reveal">Recommended Solution</div>
+  <h2 class="reveal">Pain → product.<br /><em>The direct mapping.</em></h2>
+  <p class="reveal">
+    Based on the discovery session, here's how Olo's products address each of Taco Fuego's
+    four core problems — specifically, not generically.
+  </p>
+  <div style="display:flex; flex-direction:column; gap:10px; margin:1.5rem 0;" class="reveal">
+    <div class="map-row">
+      <div class="map-pain">
+        <h3 style="color:var(--red);">22% commission bleed</h3>
+        <p>$924K/year flowing to DoorDash and Grubhub</p>
+      </div>
+      <div class="map-arrow">→</div>
+      <div class="map-solution">
+        <h3 style="color:var(--blue);">Olo Order + Dispatch</h3>
+        <p>Own the digital order channel. Use Dispatch for delivery without marketplace commission.</p>
+      </div>
+    </div>
+    <div class="map-row">
+      <div class="map-pain">
+        <h3 style="color:var(--red);">Zero guest data from 3rd-party</h3>
+        <p>Can't identify, segment, or reach marketplace guests</p>
+      </div>
+      <div class="map-arrow">→</div>
+      <div class="map-solution">
+        <h3 style="color:var(--accent);">Olo Engage GDP</h3>
+        <p>Every direct order builds a guest profile. Olo Network data enriches even new guests.</p>
+      </div>
+    </div>
+    <div class="map-row">
+      <div class="map-pain">
+        <h3 style="color:var(--red);">4-tablet kitchen chaos</h3>
+        <p>Manual re-entry, errors, slow ticket times at peak hours</p>
+      </div>
+      <div class="map-arrow">→</div>
+      <div class="map-solution">
+        <h3 style="color:var(--blue);">Olo Rails</h3>
+        <p>One integration routes all 3rd-party orders directly into the POS. Zero re-entry.</p>
+      </div>
+    </div>
+    <div class="map-row">
+      <div class="map-pain">
+        <h3 style="color:var(--red);">No loyalty or retention strategy</h3>
+        <p>High-value regulars are invisible and unreachable digitally</p>
+      </div>
+      <div class="map-arrow">→</div>
+      <div class="map-solution">
+        <h3 style="color:var(--accent);">Olo Engage Marketing</h3>
+        <p>Predictive GLV scoring, automated campaigns, and churn prevention — all from one platform.</p>
+      </div>
+    </div>
+    <div class="map-row">
+      <div class="map-pain">
+        <h3 style="color:var(--red);">Payment fraud and chargebacks</h3>
+        <p>Generic processor with no restaurant-specific fraud intelligence</p>
+      </div>
+      <div class="map-arrow">→</div>
+      <div class="map-solution">
+        <h3 style="color:var(--green);">Olo Pay</h3>
+        <p>ML fraud detection trained on millions of restaurant transactions. Higher auth rate, lower disputes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ═══════════════════════════════════════════════════
+  SECTION 5 — ROI CALCULATOR
+═══════════════════════════════════════════════════ -->
+<section id="roi">
+  <div class="section-label reveal">Projected ROI</div>
+  <h2 class="reveal">What does a 5% auth<br /><em>rate lift actually mean?</em></h2>
+  <p class="reveal">
+    Olo Pay typically improves authorization rates by around 5% over generic payment processors.
+    That sounds small — until you run the math on 35 locations.
+    Adjust the inputs below to model Taco Fuego's specific situation.
+  </p>
+  <div class="roi-card reveal">
+    <div class="roi-inputs">
+      <div class="roi-field">
+        <label>Number of locations</label>
+        <input type="number" id="locations" value="35" min="1" oninput="calcROI()" />
+        <div class="hint">Taco Fuego current footprint</div>
+      </div>
+      <div class="roi-field">
+        <label>Avg. monthly digital revenue per location ($)</label>
+        <input type="number" id="revenuePerLoc" value="10000" min="1000" step="500" oninput="calcROI()" />
+        <div class="hint">$4.2M annual GMV ÷ 35 locations ÷ 12 months</div>
+      </div>
+      <div class="roi-field">
+        <label>Current authorization rate (%)</label>
+        <input type="number" id="currentAuth" value="91" min="70" max="99" step="0.5" oninput="calcROI()" />
+        <div class="hint">Industry average with generic processors</div>
+      </div>
+      <div class="roi-field">
+        <label>Olo Pay authorization rate (%)</label>
+        <input type="number" id="oloAuth" value="96" min="70" max="99.9" step="0.5" oninput="calcROI()" />
+        <div class="hint">Typical Olo Pay lift: ~5 percentage points</div>
+      </div>
+    </div>
+    <div class="roi-results">
+      <div class="roi-result-grid">
+        <div class="roi-result-item">
+          <div class="roi-result-val amber" id="resCurrentRev">$3,822,000</div>
+          <div class="roi-result-label">Revenue captured today (annual)</div>
+        </div>
+        <div class="roi-result-item">
+          <div class="roi-result-val green" id="resOloRev">$4,032,000</div>
+          <div class="roi-result-label">Revenue captured with Olo Pay (annual)</div>
+        </div>
+        <div class="roi-result-item">
+          <div class="roi-result-val green" id="resLift">+$210,000</div>
+          <div class="roi-result-label">Additional annual revenue recovered</div>
+        </div>
+        <div class="roi-result-item">
+          <div class="roi-result-val amber" id="resPerLoc">+$6,000</div>
+          <div class="roi-result-label">Per location, per year</div>
+        </div>
+      </div>
+      <div class="roi-bar-wrap">
+        <div class="roi-bar-label">
+          <span>Current recovery rate</span>
+          <span id="barLabelOld">91%</span>
+        </div>
+        <div class="roi-bar-track">
+          <div class="roi-bar-fill" id="barOld" style="width:91%; background:var(--muted);"></div>
+        </div>
+      </div>
+      <div class="roi-bar-wrap" style="margin-top:10px;">
+        <div class="roi-bar-label">
+          <span>Olo Pay recovery rate</span>
+          <span id="barLabelNew">96%</span>
+        </div>
+        <div class="roi-bar-track">
+          <div class="roi-bar-fill" id="barNew" style="width:96%;"></div>
+        </div>
+      </div>
+      <p class="roi-note">
+        This model reflects Olo Pay's authorization rate improvement only — it does not include fraud reduction savings,
+        chargeback cost recovery, or the revenue upside from shifting marketplace orders to first-party channels.
+        Full ROI is typically 3–5× the figures shown here. Calculations based on inputs above; not a guarantee of results.
+      </p>
+    </div>
+  </div>
+</section>
+<!-- ═══════════════════════════════════════════════════
+  SECTION 6 — NEXT STEPS
+═══════════════════════════════════════════════════ -->
+<section id="next">
+  <div class="section-label reveal">Proposed Path Forward</div>
+  <h2 class="reveal">What happens<br /><em>after this conversation</em></h2>
+  <div class="closing-grid reveal">
+    <div class="closing-card">
+      <h3>For Taco Fuego</h3>
+      <ul class="closing-steps">
+        <li><span class="step-num">1</span>Share current digital GMV breakdown by channel (1st-party vs. marketplace)</li>
+        <li><span class="step-num">2</span>Confirm POS system and current payment processor for technical scoping</li>
+        <li><span class="step-num">3</span>Identify internal champion — ops leader, IT contact, and finance sign-off</li>
+        <li><span class="step-num">4</span>Schedule 60-min technical deep dive with Olo Solutions Engineering</li>
+      </ul>
+    </div>
+    <div class="closing-card">
+      <h3>From Olo (me)</h3>
+      <ul class="closing-steps">
+        <li><span class="step-num">1</span>Deliver custom ROI model with Taco Fuego's actual numbers within 48 hours</li>
+        <li><span class="step-num">2</span>Coordinate live platform demo scoped to Order + Pay — no generic product tour</li>
+        <li><span class="step-num">3</span>Connect with Olo's restaurant success team on comparable Southeast brands</li>
+        <li><span class="step-num">4</span>Draft proposed implementation timeline and go-live milestones</li>
+      </ul>
+    </div>
+  </div>
+  <div style="border:1px solid var(--border); border-radius:var(--radius); padding:1.5rem; margin-top:1.5rem; background:var(--surface);" class="reveal">
+    <div class="section-label" style="margin-bottom:0.5rem;">Prepared by</div>
+    <p style="font-size:15px; color:var(--text); margin-bottom:0.25rem; font-weight:400;">Jack Savage — Solutions Consultant</p>
+    <p style="font-size:13px; margin:0;">Operations analyst with a track record of shipping working AI systems and translating technical capability into measurable business outcomes. <a href="https://www.linkedin.com/in/jack-savage1/" target="_blank" style="color:var(--accent); text-decoration:none;">LinkedIn →</a></p>
+  </div>
+</section>
+<footer>
+  Built as a pre-interview portfolio piece to demonstrate discovery methodology, product fluency, and ROI modeling.
+  Taco Fuego is a fictional brand. Olo data sourced from <a href="https://www.olo.com" target="_blank">olo.com</a>.
+</footer>
+<script>
+  // Suite tabs
+  function showSuite(id) {
+    document.querySelectorAll('.suite-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.suite-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('suite-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+  // ROI Calculator
+  function calcROI() {
+    const locs    = parseFloat(document.getElementById('locations').value) || 35;
+    const rev     = parseFloat(document.getElementById('revenuePerLoc').value) || 10000;
+    const cur     = parseFloat(document.getElementById('currentAuth').value) / 100 || 0.91;
+    const olo     = parseFloat(document.getElementById('oloAuth').value) / 100 || 0.96;
+    const annualTotal  = locs * rev * 12;
+    const curCaptured  = annualTotal * cur;
+    const oloCaptured  = annualTotal * olo;
+    const lift         = oloCaptured - curCaptured;
+    const perLoc       = lift / locs;
+    const fmt = n => '$' + Math.round(n).toLocaleString();
+    const fmtPct = n => (n * 100).toFixed(1) + '%';
+    document.getElementById('resCurrentRev').textContent = fmt(curCaptured);
+    document.getElementById('resOloRev').textContent     = fmt(oloCaptured);
+    document.getElementById('resLift').textContent       = '+' + fmt(lift);
+    document.getElementById('resPerLoc').textContent     = '+' + fmt(perLoc);
+    document.getElementById('barOld').style.width    = (cur * 100) + '%';
+    document.getElementById('barNew').style.width    = (olo * 100) + '%';
+    document.getElementById('barLabelOld').textContent = fmtPct(cur);
+    document.getElementById('barLabelNew').textContent = fmtPct(olo);
+  }
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // Init
+  calcROI();
+</script>
+</body>
+</html>
